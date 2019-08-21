@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width">
+		<title>Зодчий</title>
+		<link rel="stylesheet" href="./css/main.css?v=1566412443035">
+	</head>
+	<body>
+		<div id="app">
+			<div class="sidebar">
+				<button class="sidebar__item" id="call" @click="showModal = true"><span>
+						<div class="sidebar__icon">
+							<svg>
+								<use xlink:href="./images/sprites.svg#call"></use>
+							</svg>
+						</div></span></button>
+				<button class="sidebar__item" id="calculator" @click="showModal = true"><span>
+						<div class="sidebar__icon">
+							<svg>
+								<use xlink:href="./images/sprites.svg#calculator"></use>
+							</svg>
+						</div></span></button>
+				<button class="sidebar__item" id="chat" @click="showModal = true"><span>
+						<div class="sidebar__icon">
+							<svg>
+								<use xlink:href="./images/sprites.svg#chat"></use>
+							</svg>
+						</div></span></button>
+			</div>
+			<div class="menu-mobile" v-show="showMenu">
+				<div class="container">
+					<div class="menu-mobile__wrap">
+						<ul class="menu-mobile__list">
+							<li><a class="menu-mobile__link" href="#">О компании</a></li>
+							<li><a class="menu-mobile__link" href="#">Акции</a></li>
+							<li><a class="menu-mobile__link" href="#">Контакты</a></li>
+							<li><a class="menu-mobile__link" href="#">Подобрать дом</a></li>
+						</ul>
+						<ul class="menu-mobile__list">
+							<li class="menu-mobile__title" @click="showList = !showList"><span>Каталог</span>
+								<ul class="menu-mobile__list" v-if="showList">
+									<li><a class="menu-mobile__link" href="#">Коттеджи</a></li>
+									<li><a class="menu-mobile__link" href="#">Дома</a></li>
+									<li><a class="menu-mobile__link" href="#">Бани</a></li>
+									<li><a class="menu-mobile__link" href="#">Садовые постройки</a></li>
+									<li><a class="menu-mobile__link" href="#">Дачные дома</a></li>
+									<li><a class="menu-mobile__link" href="#">Садовые домики</a></li>
+									<li><a class="menu-mobile__link" href="#">Индивидуальные проекты</a></li>
+								</ul>
+							</li>
+							<li class="menu-mobile__title" @click="showList = !showList"><span>Достройка и реконструкция</span>
+								<ul class="menu-mobile__list" v-if="showList">
+									<li><a class="menu-mobile__link" href="#">Пристройки</a></li>
+									<li><a class="menu-mobile__link" href="#">Достройка домов</a></li>
+									<li><a class="menu-mobile__link" href="#">Примеры работ</a></li>
+									<li><a class="menu-mobile__link" href="#">Ремонт Домов</a></li>
+									<li><a class="menu-mobile__link" href="#">Строительство и достройка малых архитектурных форм</a></li>
+									<li><a class="menu-mobile__link" href="#">Возведение Заборов из профлиста</a></li>
+								</ul>
+							</li>
+							<li class="menu-mobile__title">Услуги</li>
+							<li class="menu-mobile__title">Строительство и производство</li>
+							<li class="menu-mobile__title">Примеры домов</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<header class="header" :class="{'header--white': scrolled}" @scroll="handleScroll">
+				<div class="container header__container"><a class="header__logo" href="/"><img src="./images/logo.png" alt="Зодчий"/></a>
+					<div class="header__menu">
+						<div class="menu-top">
+							<ul class="menu-top__list">
+								<li><a class="menu-top__link" href="#">О компании</a></li>
+								<li><a class="menu-top__link" href="#">Акции</a></li>
+								<li><a class="menu-top__link" href="#">Контакты</a></li>
+								<li><a class="menu-top__link" href="#">Подобрать дом</a></li>
+							</ul>
+						</div>
+						<div class="menu-main">
+							<ul class="menu-main__list">
+								<li><a class="menu-main__link" href="#">Каталог</a>
+									<div class="menu-main__wrap">
+										<div class="container">
+											<ul class="menu-main__sublist">
+												<li><a class="menu-main__sublink" href="#">
+														<div class="menu-main__picture"><img src="./images/cottages.jpg" alt="Коттеджи"/></div>
+														<div class="menu-main__title">Коттеджи</div></a></li>
+												<li><a class="menu-main__sublink" href="#">
+														<div class="menu-main__picture"><img src="./images/home.jpg" alt="Дома"/></div>
+														<div class="menu-main__title">Дома</div></a></li>
+												<li><a class="menu-main__sublink" href="#">
+														<div class="menu-main__picture"><img src="./images/bathhouses.jpg" alt="Бани"/></div>
+														<div class="menu-main__title">Бани</div></a></li>
+												<li><a class="menu-main__sublink" href="#">
+														<div class="menu-main__picture"><img src="./images/garden_buildings.jpg" alt="Садовые постройки"/></div>
+														<div class="menu-main__title">Садовые постройки</div></a></li>
+												<li><a class="menu-main__sublink" href="#">
+														<div class="menu-main__picture"><img src="./images/cottage.jpg" alt="Дачные дома"/></div>
+														<div class="menu-main__title">Дачные дома</div></a></li>
+												<li><a class="menu-main__sublink" href="#">
+														<div class="menu-main__picture"><img src="./images/garden.jpg" alt="Садовые домики"/></div>
+														<div class="menu-main__title">Садовые домики</div></a></li>
+												<li><a class="menu-main__sublink" href="#">
+														<div class="menu-main__picture"><img src="./images/individual_projects.jpg" alt="Индивидуальные проекты"/></div>
+														<div class="menu-main__title">Индивидуальные проекты</div></a></li>
+											</ul>
+										</div>
+									</div>
+								</li>
+								<li><a class="menu-main__link" href="#">Достройка и реконструкция</a>
+									<div class="menu-main__wrap menu-main__wrap--pt-small">
+										<div class="container">
+											<ul class="menu-main__dropdown">
+												<li class="menu-main__dropdown-item"><a class="menu-main__dropdown-head" href="#">Пристройки</a>
+													<ul class="menu-main__dropdown-list">
+														<li><a class="menu-main__dropdown-link" href="#">Пристройки к строениям</a></li>
+														<li><a class="menu-main__dropdown-link" href="#">Устройство мансардных этажей</a></li>
+													</ul>
+												</li>
+												<li class="menu-main__dropdown-item"><a class="menu-main__dropdown-head" href="#">Достройка домов</a>
+													<ul class="menu-main__dropdown-list">
+														<li><a class="menu-main__dropdown-link" href="#">Завершение строительства</a></li>
+														<li><a class="menu-main__dropdown-link" href="#">Возведение крыш</a></li>
+														<li><a class="menu-main__dropdown-link" href="#">Объединение строений</a></li>
+														<li><a class="menu-main__dropdown-link" href="#">Устройство отмостки</a></li>
+													</ul>
+												</li>
+												<li class="menu-main__dropdown-item"><a class="menu-main__dropdown-head" href="#">Примеры работ</a>
+												</li>
+												<li class="menu-main__dropdown-item"><a class="menu-main__dropdown-head" href="#">Ремонт Домов</a>
+													<ul class="menu-main__dropdown-list">
+														<li><a class="menu-main__dropdown-link" href="#">Замена кровли</a></li>
+														<li><a class="menu-main__dropdown-link" href="#">Утепление строений</a></li>
+														<li><a class="menu-main__dropdown-link" href="#">Наружная отделка домов</a></li>
+														<li><a class="menu-main__dropdown-link" href="#">Внутренняя отделка помещений</a></li>
+														<li><a class="menu-main__dropdown-link" href="#">Внутренняя перепланировка помещений</a></li>
+													</ul>
+												</li>
+												<li class="menu-main__dropdown-item"><a class="menu-main__dropdown-head" href="#">Строительство и достройка малых архитектурных форм</a>
+												</li>
+												<li class="menu-main__dropdown-item"><a class="menu-main__dropdown-head" href="#">Возведение Заборов из профлиста</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</li>
+								<li><a class="menu-main__link" href="#">Услуги</a>
+								</li>
+								<li><a class="menu-main__link" href="#">Строительство и производство</a>
+								</li>
+								<li><a class="menu-main__link" href="#">Примеры домов</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="header__action">
+						<button class="header__btn"><span>
+								<div class="header__icon">
+									<svg>
+										<use xlink:href="./images/sprites.svg#phone"></use>
+									</svg>
+								</div>Обратный звонок</span></button>
+						<div class="header__wrap"><a class="header__phone" href="tel:+74959213301">+7 495 921 33 01		</a>
+							<div class="header__separator"></div>
+							<button class="header__search">
+								<svg>
+									<use xlink:href="./images/sprites.svg#search"></use>
+								</svg>
+							</button>
+						</div>
+					</div>
+					<div class="header__burger" :class="{'header__burger--black': showMenu}" @click="showMenu = !showMenu">Меню</div>
+				</div>
+			</header>
+			<div class="main-slider">
+				<div class="main-slider__img swiper-container">
+					<div class="swiper-wrapper">
+						<div class="main-slider__slide swiper-slide" style="background-image: url(./images/main_slide_1.jpg)"></div>
+						<div class="main-slider__slide swiper-slide" style="background-image: url(./images/main_slide_2.jpg)"></div>
+					</div>
+					<div class="main-slider__pagination swiper-pagination"></div>
+				</div>
+				<div class="main-slider__content swiper-container">
+					<div class="swiper-wrapper container main-slider__container">
+						<div class="swiper-slide">
+							<div class="main-slider__wrap">
+								<div class="main-slider__title">Закажите дом в октябре</div>
+								<div class="main-slider__offer"><span>Экономия</span><br> <span>до <b>1 014 450</b> руб.</span></div>
+								<div class="main-slider__text"><span>В октябре в «Зодчем» скидки до 33%. Вдобавок к этому при</span> <span>покупке коттеджей, домов серии "Феникс", «Балчуг» и «Олимп»</span> <span>Вы можете выбрать понравившийся подарок</span></div><a class="button button--link" href="#">узнать подробности</a>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="main-slider__wrap">
+								<div class="main-slider__title">Закажите дом в октябре</div>
+								<div class="main-slider__offer"><span>Экономия</span><br> <span>до <b>1 014 450</b> руб.</span></div>
+								<div class="main-slider__text"><span>В октябре в «Зодчем» скидки до 33%. Вдобавок к этому при</span> <span>покупке коттеджей, домов серии "Феникс", «Балчуг» и «Олимп»</span> <span>Вы можете выбрать понравившийся подарок</span></div><a class="button button--link" href="#">узнать подробности</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="content">
+				<div class="container">
+					<div class="content__container">
+						<div class="content__row">
+							<div class="banners">
+								<div class="banners__item banners__item--big"><img class="banners__img" src="./images/banners/banners_1.jpg"/><a class="banners__link" href="#"></a>
+									<div class="banners__title">Коттеджи</div>
+									<div class="banners__arrow">
+										<svg>
+											<use xlink:href="./images/sprites.svg#arrow"></use>
+										</svg>
+									</div>
+								</div>
+								<div class="banners__wrap">
+									<div class="banners__item"><img class="banners__img" src="./images/banners/banners_2.jpg"/><a class="banners__link" href="#"></a>
+										<div class="banners__title">Дома</div>
+										<div class="banners__arrow">
+											<svg>
+												<use xlink:href="./images/sprites.svg#arrow"></use>
+											</svg>
+										</div>
+									</div>
+									<div class="banners__item"><img class="banners__img" src="./images/banners/banners_3.jpg"/><a class="banners__link" href="#"></a>
+										<div class="banners__title">Бани</div>
+										<div class="banners__arrow">
+											<svg>
+												<use xlink:href="./images/sprites.svg#arrow"></use>
+											</svg>
+										</div>
+									</div>
+									<div class="banners__item"><img class="banners__img" src="./images/banners/banners_4.jpg"/><a class="banners__link" href="#"></a>
+										<div class="banners__title">Садовые постройки</div>
+										<div class="banners__arrow">
+											<svg>
+												<use xlink:href="./images/sprites.svg#arrow"></use>
+											</svg>
+										</div>
+									</div>
+									<div class="banners__item"><img class="banners__img" src="./images/banners/banners_5.jpg"/><a class="banners__link" href="#"></a>
+										<div class="banners__title">Дачные Дома</div>
+										<div class="banners__arrow">
+											<svg>
+												<use xlink:href="./images/sprites.svg#arrow"></use>
+											</svg>
+										</div>
+									</div>
+									<div class="banners__item"><img class="banners__img" src="./images/banners/banners_6.jpg"/><a class="banners__link" href="#"></a>
+										<div class="banners__title">Садовые домики</div>
+										<div class="banners__arrow">
+											<svg>
+												<use xlink:href="./images/sprites.svg#arrow"></use>
+											</svg>
+										</div>
+									</div>
+									<div class="banners__item"><img class="banners__img" src="./images/banners/banners_7.jpg"/><a class="banners__link" href="#"></a>
+										<div class="banners__title">Индивидуальные проекты</div>
+										<div class="banners__arrow">
+											<svg>
+												<use xlink:href="./images/sprites.svg#arrow"></use>
+											</svg>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="benefits">
+								<div class="benefits__item">
+									<div class="benefits__icon">
+										<svg>
+											<use xlink:href="./images/sprites.svg#experience"></use>
+										</svg>
+									</div>
+									<div class="benefits__content">
+										<div class="benefits__title">22 года на рынке</div>
+										<div class="benefits__text">За это время мы построили более 196 000 домов и бань</div>
+									</div>
+								</div>
+								<div class="benefits__item">
+									<div class="benefits__icon">
+										<svg>
+											<use xlink:href="./images/sprites.svg#all_inclusive"></use>
+										</svg>
+									</div>
+									<div class="benefits__content">
+										<div class="benefits__title">Полный цикл производства</div>
+										<div class="benefits__text">Мы контролируем весь процес: от лесозаготовки до монтажа дома на участке</div>
+									</div>
+								</div>
+								<div class="benefits__item">
+									<div class="benefits__icon">
+										<svg>
+											<use xlink:href="./images/sprites.svg#warranty"></use>
+										</svg>
+									</div>
+									<div class="benefits__content">
+										<div class="benefits__title">Гарантия до 20 лет</div>
+										<div class="benefits__text">Мы используем лучшее сырье и лучшее европейское оборудование, на котором работают лучшие специалисты</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="news">
+							<div class="news__title">Новости</div>
+							<div class="news__slider swiper-container">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide">
+										<div class="news__item">
+											<div class="news__img" style="background-image: url(./images/news_1.jpg)"></div>
+											<div class="news__content">
+												<div class="news__subtitle">Встречайте: «Сварог» и «Ветлуга» из клееного бруса!</div>
+												<div class="news__date">
+													<div class="news__icon">
+														<svg>
+															<use xlink:href="./images/sprites.svg#time"></use>
+														</svg>
+													</div>20 сен. 2014
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="swiper-slide">
+										<div class="news__item">
+											<div class="news__img" style="background-image: url(./images/news_2.jpg)"></div>
+											<div class="news__content">
+												<div class="news__subtitle">Новый дом от «Зодчего», или «Феникс» расправляет крылья</div>
+												<div class="news__date">
+													<div class="news__icon">
+														<svg>
+															<use xlink:href="./images/sprites.svg#time"></use>
+														</svg>
+													</div>20 сен. 2014
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="swiper-slide">
+										<div class="news__item">
+											<div class="news__img" style="background-image: url(./images/news_3.jpg)"></div>
+											<div class="news__content">
+												<div class="news__subtitle">Отдыхай в «Карелии»: коттеджи «Карелия» стали дешевле!</div>
+												<div class="news__date">
+													<div class="news__icon">
+														<svg>
+															<use xlink:href="./images/sprites.svg#time"></use>
+														</svg>
+													</div>20 сен. 2014
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="swiper-slide">
+										<div class="news__item">
+											<div class="news__img" style="background-image: url(./images/news_4.jpg)"></div>
+											<div class="news__content">
+												<div class="news__subtitle">Встречайте: «Сварог» и «Ветлуга» из клееного бруса!</div>
+												<div class="news__date">
+													<div class="news__icon">
+														<svg>
+															<use xlink:href="./images/sprites.svg#time"></use>
+														</svg>
+													</div>20 сен. 2014
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="news__pagination swiper-pagination"></div>
+							</div>
+							<div class="news__arrow news__arrow--prev">
+								<svg>
+									<use xlink:href="./images/sprites.svg#arrow_slider"></use>
+								</svg>
+							</div>
+							<div class="news__arrow news__arrow--next">
+								<svg>
+									<use xlink:href="./images/sprites.svg#arrow_slider"></use>
+								</svg>
+							</div>
+						</div>
+						<div class="seo-block" style="background-image: url(./images/seo_1.jpg)">
+							<div class="seo-block__content">
+								<div class="seo-block__title">Строительство деревянных домов<br> и бань под ключ</div>
+								<div class="seo-block__text">Компания располагает выставочными площадками в Москве, Туле и Рязани.<br> На них каркасные и брусовые дома представлены в полную величину. У каждого посетителя есть возможность увидеть уже готовые постройки из дерева; с помощью менеджеров подобрать оптимальную комплектацию, узнать цены с учётом действующих скидок, выбрать и недорого купить наиболее подходящий деревянный дом или баню. Дома строятся без предоплаты. В ходе строительства цены не пересматриваются. Специально для заказчиков «Зодчего» разработаны программы кредитования и рассрочки. Словом сделано всё, чтобы тысячи людей могли ежегодно воплощать свои мечты о новом, современном, собственном доме в жизнь</div>
+							</div>
+						</div>
+						<div class="seo-block" style="background-image: url(./images/seo_2.jpg)">
+							<div class="seo-block__content seo-block__content--right">
+								<div class="seo-block__title">Загородные дома из дерева в Москве</div>
+								<div class="seo-block__text">Компания располагает выставочными площадками в Москве, Туле и Рязани.<br> На них каркасные и брусовые дома представлены в полную величину. У каждого посетителя есть возможность увидеть уже готовые постройки из дерева; с помощью менеджеров подобрать оптимальную комплектацию, узнать цены с учётом действующих скидок, выбрать и недорого купить наиболее подходящий деревянный дом или баню. Дома строятся без предоплаты. В ходе строительства цены не пересматриваются. Специально для заказчиков «Зодчего» разработаны программы кредитования и рассрочки. Словом сделано всё, чтобы тысячи людей могли ежегодно воплощать свои мечты о новом, современном, собственном доме в жизнь</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<footer class="footer">
+				<div class="container">
+					<div class="footer__wrap">
+						<div class="footer__map-site">
+							<div class="map-site"><a class="map-site__title" href="#">Каталог</a>
+								<ul class="map-site__list">
+									<li><a class="map-site__link" href="#">Коттеджи</a></li>
+									<li><a class="map-site__link" href="#">Дома</a></li>
+									<li><a class="map-site__link" href="#">Дачные дома</a></li>
+									<li><a class="map-site__link" href="#">Бани</a></li>
+									<li><a class="map-site__link" href="#">Садовые домики</a></li>
+									<li><a class="map-site__link" href="#">Садовые постройки</a></li>
+									<li><a class="map-site__link" href="#">Бытовки</a></li>
+									<li><a class="map-site__link" href="#">Беседки</a></li>
+									<li><a class="map-site__link" href="#">Душевые и туалеты</a></li>
+									<li><a class="map-site__link" href="#">Индивидуальные проекты</a></li>
+								</ul><a class="map-site__title" href="#">примеры домов</a><a class="map-site__title" href="#">Строительство и производство</a><a class="map-site__title map-site__title--mt-big" href="#">Достройка и реконструкция</a>
+								<ul class="map-site__list">
+									<li><a class="map-site__link" href="#">Достройка дома</a></li>
+									<li><a class="map-site__link" href="#">Пристройки</a></li>
+									<li><a class="map-site__link" href="#">Ремонт дома</a></li>
+									<li><a class="map-site__link" href="#">Ремонт кровли</a></li>
+									<li><a class="map-site__link" href="#">Строительство малых архитектурных форм</a></li>
+									<li><a class="map-site__link" href="#">Возведение крыш</a></li>
+									<li><a class="map-site__link" href="#">Утепление</a></li>
+									<li><a class="map-site__link" href="#">Завершение строительства</a></li>
+									<li><a class="map-site__link" href="#">Перепланировка помещений</a></li>
+									<li><a class="map-site__link" href="#">Отделка помещений</a></li>
+									<li><a class="map-site__link" href="#">Наружная отделка</a></li>
+									<li><a class="map-site__link" href="#">Объединение строений</a></li>
+									<li><a class="map-site__link" href="#">Устройство отмостки</a></li>
+									<li><a class="map-site__link" href="#">Возведение заборов</a></li>
+								</ul><a class="map-site__title" href="#">услуги</a>
+								<ul class="map-site__list">
+									<li><a class="map-site__link" href="#">Фундаменты</a></li>
+									<li><a class="map-site__link" href="#">Инженерные коммуникации</a></li>
+									<li><a class="map-site__link" href="#">Индивидуальное проектирование</a></li>
+									<li><a class="map-site__link" href="#">Строительство в кредит</a></li>
+									<li><a class="map-site__link" href="#">Земельные участки</a></li>
+								</ul><a class="map-site__title" href="#">Контакты</a><a class="map-site__title" href="#">О компании</a>
+								<ul class="map-site__list">
+									<li><a class="map-site__link" href="#">Новости</a></li>
+									<li><a class="map-site__link" href="#">Акции</a></li>
+									<li><a class="map-site__link" href="#">Вопросы и ответы</a></li>
+									<li><a class="map-site__link" href="#">Отзывы</a></li>
+									<li><a class="map-site__link" href="#">Партнеры</a></li>
+									<li><a class="map-site__link" href="#">Дилеры</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="footer__contact"><a class="footer__tel" href="tel:+74959213301">+7 495 921 33 01</a>
+							<button class="footer__btn"><span>
+									<div class="footer__icon">
+										<svg>
+											<use xlink:href="./images/sprites.svg#tel"></use>
+										</svg>
+									</div>обратный звонок</span></button>
+							<button class="footer__btn"><span>
+									<div class="footer__icon">
+										<svg>
+											<use xlink:href="./images/sprites.svg#question"></use>
+										</svg>
+									</div>задать вопрос</span></button>
+							<div class="footer__authorization">
+								<div class="footer__separator"></div>
+								<button class="footer__btn-authorization"><span>
+										<div class="footer__icon footer__icon--middle">
+											<svg>
+												<use xlink:href="./images/sprites.svg#to_come"></use>
+											</svg>
+										</div>Войти</span></button>
+								<button class="footer__btn-authorization"><span>
+										<div class="footer__icon footer__icon--middle">
+											<svg>
+												<use xlink:href="./images/sprites.svg#to_register"></use>
+											</svg>
+										</div>Зарегистрироваться</span></button>
+							</div>
+							<div class="social"><a class="social__link" href="#" target="_blank">
+									<div class="social__icon">
+										<svg>
+											<use xlink:href="./images/sprites.svg#vk"></use>
+										</svg>
+									</div></a><a class="social__link" href="#" target="_blank">
+									<div class="social__icon">
+										<svg>
+											<use xlink:href="./images/sprites.svg#odnoklassniki"></use>
+										</svg>
+									</div></a><a class="social__link" href="#" target="_blank">
+									<div class="social__icon">
+										<svg>
+											<use xlink:href="./images/sprites.svg#facebook"></use>
+										</svg>
+									</div></a>
+							</div>
+							<div class="copyright">
+								<p>© 2000-2014 ООО «ЗОДЧИЙ.ру»</p>
+								<p>Строительство деревянных домов и бань под ключ</p>
+								<p>Не является публичной офертой</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
+			<div class="popup" v-show="showModal">
+				<div class="popup__overlay">
+					<div class="popup-modal">
+						<div class="popup-modal__close" @click="showModal = false">
+							<svg>
+								<use xlink:href="./images/sprites.svg#close"></use>
+							</svg>
+						</div>
+						<div class="popup-modal__content">
+							<div class="popup-modal__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="./js/vendor.js?v=1566412443045"></script>
+		<script src="./js/main.js?v=1566412443045"></script>
+	</body>
+</html>
